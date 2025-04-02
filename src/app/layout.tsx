@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/provider/theme";
 
 import "./globals.css";
+
+import { Navbar } from "@/components/navbar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,7 +25,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "antialiased")}>{children}</body>
+      <body className={cn(inter.className, "antialiased")}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
